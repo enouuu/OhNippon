@@ -2,7 +2,7 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <context-param>
         <param-name>header</param-name>
-        <param-value>Header placeholder</param-value> <-- subject to change -->
+        <param-value>Header placeholder</param-value> <!-- subject to change -->
     </context-param>
     <context-param>
         <param-name>footer</param-name>
@@ -21,31 +21,31 @@
         <servlet-class>Controllers.Controller_Main</servlet-class>
         <init-param>
             <param-name>className</param-name>
-            <param-value>org.apache.derby.jdbc.ClientDriver</param-value>  <-- subject to change -->
+            <param-value>org.apache.derby.jdbc.ClientDriver</param-value>  <!-- subject to change -->
         </init-param>
         <init-param>
             <param-name>username</param-name>
-            <param-value>app</param-value> <-- subject to change -->
+            <param-value>app</param-value> <!-- subject to change -->
         </init-param>
         <init-param>
             <param-name>password</param-name>
-            <param-value>app</param-value> <-- subject to change -->
+            <param-value>app</param-value> <!-- subject to change -->
         </init-param>
         <init-param>
             <param-name>driverURL</param-name>
-            <param-value>jdbc:derby</param-value> <-- subject to change -->
+            <param-value>jdbc:derby</param-value> <!-- subject to change -->
         </init-param>
         <init-param>
             <param-name>hostName</param-name>
-            <param-value>localhost</param-value> <-- subject to change -->
+            <param-value>localhost</param-value> <!-- subject to change -->
         </init-param>
         <init-param>
             <param-name>port</param-name>
-            <param-value>1527</param-value> <-- subject to change -->
+            <param-value>1527</param-value> <!-- subject to change -->
         </init-param>
         <init-param>
             <param-name>dbName</param-name>
-            <param-value>UserDB</param-value> <-- subject to change -->
+            <param-value>UserDB</param-value> <!-- subject to change -->
         </init-param>
         <init-param>
             <param-name>error1_Message</param-name>
