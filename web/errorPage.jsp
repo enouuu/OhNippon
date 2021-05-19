@@ -13,5 +13,13 @@
     </head>
     <body>
         <h1>something something error message here</h1>
+        <%
+            ServletContext sc = getServletContext();
+            response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+            String header = getServletContext().getInitParameter("header");
+            String footer = getServletContext().getInitParameter("footer");
+            String errMsg = (String) getServletContext().getAttribute("errorMessage");
+            out.print(errMsg);
+        %>
     </body>
 </html>

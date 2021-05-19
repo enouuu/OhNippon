@@ -25,10 +25,12 @@
                     <div class ="logoHeader"><img class="logo"  src="images\OhNipponLogo.png"><img class="logoText"  src="images\OhNipponText.png"></div>
                     <div class= "menuList">
                         <ul>
-                            <li><a href =# class = "active">HOME</a></li>
-                            <li><a href =#>STORE</a></li>
-                            <li><a href =#>ABOUT</a></li>
-                            <li><a href =#><img  src="images\signin.png" class = "signInButton">&nbsp&nbspSIGN IN</a></li>
+                            <li><a href ="landing.jsp" class = "active">HOME</a></li>
+                            <li><a href ="store.jsp">STORE</a></li>
+                            <li><a href ="about.jsp">ABOUT</a></li>
+                            <!-- add if else statement here to reveal profile/logout button
+                            if the user is signed in. otherwise reveal the sign in button and hide the profile/logout button. -->
+                            <li><a href ="signIn.jsp"><img  src="images\signin.png" class = "signInButton">&nbsp&nbspSIGN IN</a></li>
                         </ul>
                     </div>
                 </div>
@@ -54,7 +56,7 @@
         <section class =  "featured">
             <div class ="featuredCont">
                 <div class ="featuredLabel">Featured Video</div>
-                <iframe class ="ytVid" src="https://www.youtube.com/embed/uKxyLmbOc0Q"></iframe>
+                <iframe class ="ytVid" src="https://www.youtube.com/embed/eD6fiaqvhdk"></iframe>
             </div>
             <div class="featuredText"><h1 class="featuredTitle ">TITLE</h1>
                 <p class ="featuredContent">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 

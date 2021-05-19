@@ -1,29 +1,28 @@
 package Model;
 public class User {
     
-    private static String username;
+    private static String email;
     private static String password;
     private static String role;
     private static String captcha;
-    private static String subStatus;
+    private static boolean subStatus;
     
-    public User(String uName, String pWord, String userRole, String status, String captchaInput) {
-       username = uName;
+    public User(String uName, String pWord, String userRole, boolean status) {
+       email = uName;
        password = pWord;
        role = userRole;
        subStatus = status;
-       captcha = captchaInput;
     }
     
-    public void setDetails(String uName, String pWord, String userRole, String status){
-        username = uName;
+    public void setDetails(String uEmail, String pWord, String userRole, boolean status){
+        email = uEmail;
         password = pWord;
         role = userRole;
         subStatus = status;
     }
     
-    public String getUsername(){
-        return username;
+    public String getEmail(){
+        return email;
     }
     
     public String getPassword(){
@@ -34,16 +33,12 @@ public class User {
         return role;
     }
     
-    public String getInputCaptcha(){
-        return captcha;
-    }
-    
-    public String getSubscription(){
+    public boolean getSubscription(){
         return subStatus;
     }
     
     public String toString(){
-        return "Username: " + username + "\nPassword: " + password + "\nSubscription Status: " + subStatus + "\nRole: " + role;
+        return "Username: " + email + "\nPassword: " + password + "\nIs subscribed?: " + subStatus + "\nRole: " + role;
     }
     
 }
