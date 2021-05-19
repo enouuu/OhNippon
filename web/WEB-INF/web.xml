@@ -1,111 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-    <context-param>
-        <param-name>header</param-name>
-        <param-value>Header placeholder</param-value> <!-- subject to change -->
-    </context-param>
-    <context-param>
-        <param-name>footer</param-name>
-        <param-value>Copyright, 2021.</param-value> 
-    </context-param>
-    <listener>
-        <description>ServletContextListener</description>
-        <listener-class>Listeners.userContextListener</listener-class>
-    </listener>
-    <listener>
-        <description>ServletContextListener</description>
-        <listener-class>Listeners.exceptionsListener</listener-class>
-    </listener>
-    <servlet>
-        <servlet-name>Controller_Main</servlet-name>
-        <servlet-class>Controllers.Controller_Main</servlet-class>
-        <init-param>
-            <param-name>className</param-name>
-            <param-value>org.apache.derby.jdbc.ClientDriver</param-value>  <!-- subject to change -->
-        </init-param>
-        <init-param>
-            <param-name>username</param-name>
-            <param-value>app</param-value> <!-- subject to change -->
-        </init-param>
-        <init-param>
-            <param-name>password</param-name>
-            <param-value>app</param-value> <!-- subject to change -->
-        </init-param>
-        <init-param>
-            <param-name>driverURL</param-name>
-            <param-value>jdbc:derby</param-value> <!-- subject to change -->
-        </init-param>
-        <init-param>
-            <param-name>hostName</param-name>
-            <param-value>localhost</param-value> <!-- subject to change -->
-        </init-param>
-        <init-param>
-            <param-name>port</param-name>
-            <param-value>1527</param-value> <!-- subject to change -->
-        </init-param>
-        <init-param>
-            <param-name>dbName</param-name>
-            <param-value>UserDB</param-value> <!-- subject to change -->
-        </init-param>
-        <init-param>
-            <param-name>error1_Message</param-name>
-            <param-value>Blank username and password fields. Please enter your username and password.</param-value>
-        </init-param>
-        <init-param>
-            <param-name>error2_Message</param-name>
-            <param-value>You entered the wrong username, and the password field is blank.</param-value>
-        </init-param>
-        <init-param>
-            <param-name>error3_Message</param-name>
-            <param-value>You entered the correct username, but the password does not match.</param-value>
-        </init-param>
-        <init-param>
-            <param-name>error4_Message</param-name>
-            <param-value>This user does not exist at all.</param-value>
-        </init-param>
-        <init-param>
-            <param-name>error5_Message</param-name>
-            <param-value>This user already exists in the database.</param-value>
-        </init-param>
-        <init-param>
-            <param-name>error6_Message</param-name>
-            <param-value>Your CAPTCHA input is wrong. Please try again.</param-value>
-        </init-param>
-        <init-param>
-            <param-name>error7_Message</param-name>
-            <param-value>Your password does not match the CONFIRM password field. Please enter the same password.</param-value>
-        </init-param>
-    </servlet>
-    <servlet>
-        <servlet-name>Controller_Captcha</servlet-name>
-        <servlet-class>nl.captcha.servlet.SimpleCaptchaServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Controller_Main</servlet-name>
-        <url-pattern>/main</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Controller_Captcha</servlet-name>
-        <url-pattern>/Captcha</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
-            120
+            30
         </session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>landing.jsp</welcome-file>
     </welcome-file-list>
-    <error-page>
-        <error-code>404</error-code>
-        <location>/error404.jsp</location>
-    </error-page>
-    <error-page>
-        <exception-type>Exceptions.AuthenticationException</exception-type>
-        <location>/errorPage.jsp</location>
-    </error-page>
-    <error-page>
-        <exception-type>Exceptions.NullValueException</exception-type>
-        <location>/errorPage.jsp</location>
-    </error-page>
 </web-app>
