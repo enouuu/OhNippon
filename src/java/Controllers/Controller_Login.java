@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import nl.captcha.Captcha;
 import static security.CipherMain.decrypt;
 
 public class Controller_Login extends HttpServlet {
@@ -57,39 +58,52 @@ public class Controller_Login extends HttpServlet {
         ServletContext sc = getServletContext();
         try {
             if (con != null) {
-                String email = request.getParameter("inputEmail").trim();
-                String pass = request.getParameter("inputPword").trim();
-                if (email.equals("") && pass.equals("")) {
-                    throw new NullValueException();
-                }
-                String query = "SELECT * FROM USER_INFO ORDER BY EMAIL";
-                PreparedStatement pStmt = con.prepareStatement(query);
-                ResultSet rs = pStmt.executeQuery();
-                while (rs.next()) {
-                    if (email.equals(rs.getString("EMAIL")) && pass.equals(decrypt(rs.getString("PASSWORD")))) {
-                        HttpSession session = request.getSession();
-                        session.setAttribute("sessionTest", true);
-                        User human = new User(email, pass, rs.getString("ROLE"), rs.getBoolean("SUBSTATUS"));
-                        sc.setAttribute("loginDetails", human);
-                        userContextListener ucl = new userContextListener();
-                        ucl.contextInitialized(new ServletContextEvent(sc));
-                        response.sendRedirect("landing.jsp");
-                        return;
-                    } else if (email.equals(rs.getString("EMAIL")) && !pass.equals(decrypt(rs.getString("PASSWORD")))) {
-                        //error 2 - correct email, wrong pass
-                        sc.setAttribute("errorMessage", "You entered the wrong password!");
-                        throw new AuthenticationException();
+                HttpSession session = request.getSession();
+                Captcha captcha = (Captcha) session.getAttribute(Captcha.NAME);
+                String answer = request.getParameter("inputCaptcha");
+                if(captcha.isCorrect(answer)){
+                
+                    String email = request.getParameter("inputEmail").trim();
+                    String pass = request.getParameter("inputPword").trim();
+                    if(email.isEmpty() && pass.isEmpty()){
+                        sc.setAttribute("errorMessage", "Gomen, both email and password is empty!");
+                        throw new NullValueException();
                     }
-                }
-                pStmt.close();
-                rs.close();
-                if (pass.equals("")) {
-                    //error 1 - email is not in DB, blank pass
-                    sc.setAttribute("errorMessage", "That user does not exist in our database!");
-                    throw new AuthenticationException();
+                    else if (email.isEmpty()) {
+                        sc.setAttribute("errorMessage", "Gomen, Entered email is empty!");
+                        throw new NullValueException();
+                    } else if(pass.isEmpty()){
+                        sc.setAttribute("errorMessage", "Gomen, Entered password is empty!");
+                        throw new NullValueException();
+                    }
+                    String query = "SELECT * FROM USER_INFO ORDER BY EMAIL";
+                    PreparedStatement pStmt = con.prepareStatement(query);
+                    ResultSet rs = pStmt.executeQuery();
+                    while (rs.next()) {
+                        if (email.equals(rs.getString("EMAIL")) && pass.equals(decrypt(rs.getString("PASSWORD")))) {
+                            //HttpSession session = request.getSession();
+                            session.setAttribute("sessionTest", true);
+                            User human = new User(email, pass, rs.getString("ROLE"), rs.getBoolean("SUBSTATUS"));
+                            sc.setAttribute("loginDetails", human);
+                            userContextListener ucl = new userContextListener();
+                            ucl.contextInitialized(new ServletContextEvent(sc));
+                            response.sendRedirect("landing.jsp");
+                            return;
+
+                        }else if (email.equals(rs.getString("EMAIL")) && !pass.equals(decrypt(rs.getString("PASSWORD")))) {
+                            //error 2 - correct email, wrong pass
+                            sc.setAttribute("errorMessage", "You entered the wrong password!");
+                            throw new AuthenticationException();
+                        } else if(rs.next() == false){
+                           sc.setAttribute("errorMessage", "Gomen, the email does not exist in our database!");
+                           throw new AuthenticationException();
+                        }
+                    }
+                    pStmt.close();
+                    rs.close();
                 } else {
-                    //error 3 - wrong email and pass, not blank
-                    sc.setAttribute("errorMessage", "You entered an invalid email or an invalid password!");
+                    sc.setAttribute("errorMessage", "Incorrect Captcha entered!");
+                    throw new AuthenticationException();
                 }
             } else {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -98,10 +112,8 @@ public class Controller_Login extends HttpServlet {
             sc.setAttribute("errorMessage", "SQL Exception occurred!");
             response.sendRedirect("errorPage.jsp");
         } catch (NullValueException nve){
-            sc.setAttribute("errorMessage", "A null value exception occurred!");
             response.sendRedirect("errorPage.jsp");
         } catch (AuthenticationException aue){
-            sc.setAttribute("errorMessage", "An authentication exception occurred!");
             response.sendRedirect("errorPage.jsp");
         }
     }

@@ -1,6 +1,7 @@
 package Controllers;
 
 import Exceptions.AuthenticationException;
+import Exceptions.NullValueException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -77,14 +79,30 @@ public class Controller_SignUp extends HttpServlet {
                     String conpass = request.getParameter("confirmPword").trim();
                     String bday = request.getParameter("regBday").trim();
                     if (!pass.equals(conpass)) { //password checker
-                        throw new AuthenticationException("Passwords don't match.");
+                        sc.setAttribute("errorMessage", "Gomen, your password does not match with your confirm password!");
+                        throw new AuthenticationException();
                     }
-                    
                     if(!checkAge(Integer.parseInt(bday.substring(0, 4)), Integer.parseInt(bday.substring(5, 7))
                             , Integer.parseInt(bday.substring(8)))){
                         sc.setAttribute("errorMessage", "You are under 18 years old!");
                         throw new AuthenticationException();
-                    }
+                    }  
+                    if (fn.isEmpty()){
+                        sc.setAttribute("errorMessage", "Gomen, first name is empty!");
+                        throw new NullValueException();
+                    } else if (fn.isEmpty()){
+                        sc.setAttribute("errorMessage", "Gomen, first name is empty!");
+                        throw new NullValueException();
+                    } else if (ln.isEmpty()){
+                        sc.setAttribute("errorMessage", "Gomen, last name is empty!");
+                        throw new NullValueException();
+                    } else if (email.isEmpty()){
+                        sc.setAttribute("errorMessage", "Gomen, email is empty!");
+                        throw new NullValueException();
+                    } else if (pass.isEmpty()){
+                        sc.setAttribute("errorMessage", "Gomen, password is empty!");
+                        throw new NullValueException();
+                    } 
                     System.out.println(testAge);
                     String query = "SELECT EMAIL FROM USER_INFO";
                     PreparedStatement pStmt = con.prepareStatement(query);
@@ -96,14 +114,14 @@ public class Controller_SignUp extends HttpServlet {
                         }
                     }
                     pStmt.close();
-
+                   
                     PreparedStatement st = con.prepareStatement("INSERT INTO USER_INFO (FIRSTNAME, LASTNAME, EMAIL, PASSWORD, BIRTHDAY, ROLE, SUBSTATUS) VALUES (?, ?, ?, ?, ?, ?, ?)");
                     st.setString(1, fn);
                     st.setString(2, ln);
                     st.setString(3, email);
                     st.setString(4, encrypt(pass));
                     st.setString(5, bday);
-                    st.setString(6, "Admin");
+                    st.setString(6, "Guest");
                     st.setBoolean(7, false);
                     st.executeUpdate();
                     response.sendRedirect("landing.jsp");
@@ -119,9 +137,13 @@ public class Controller_SignUp extends HttpServlet {
             }
         } catch (SQLException sqle) {
             sc.setAttribute("errorMessage", "SQL Exception occurred!");
-            response.sendRedirect("error404.jsp");
+            response.sendRedirect("errorPage.jsp");
+        } catch (NumberFormatException nfe) {
+            sc.setAttribute("errorMessage", "Invalid date");
+            response.sendRedirect("errorPage.jsp");
         } catch (AuthenticationException aue) {
-            sc.setAttribute("errorMessage", "An authentication exception occurred!");
+            response.sendRedirect("errorPage.jsp");
+        } catch (NullValueException nve){
             response.sendRedirect("errorPage.jsp");
         }
     }
