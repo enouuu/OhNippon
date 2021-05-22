@@ -14,7 +14,8 @@
         <link rel="icon" href="images\OhNipponLogo.png">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Oops!</title>
+        <link rel="icon" href="images\OhNipponLogo.png">
+        <title>Oh! Nippon</title>
     </head>
     <body>
         <section class ="header">
@@ -24,12 +25,13 @@
                     <div class ="logoHeader"><img class="logo"  src="images\OhNipponLogo.png"><img class="logoText"  src="images\OhNipponText.png"></div>
                     <div class= "menuList">
                         <ul>
-                            <li><a href ="landing.jsp" class = "active">HOME</a></li>
+                            <li><a href ="landing.jsp" >HOME</a></li>
                             <li><a href ="store.jsp">STORE</a></li>
                             <li><a href ="about.jsp">ABOUT</a></li>
                             <!-- add if else statement here to reveal profile/logout button
                             if the user is signed in. otherwise reveal the sign in button and hide the profile/logout button. -->
                             <li><a href ="signIn.jsp"><img  src="images\signin.png" class = "signInButton">&nbsp&nbspSIGN IN</a></li>
+                           <li><a href ="success.jsp" class = "active">&nbsp&nbsp&nbspPROFILE</a></li>
                         </ul>
                     </div>
                 </div>
@@ -88,28 +90,5 @@
                 window.history.back();
             }
         </script>
-=======
-    Document   : pdf
-    Created on : May 20, 2021, 1:04:23 PM
-    Author     : PC
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.sql.ResultSet"%>
-<%@ page import="java.util.*" %>
-<%@ page import="Model.User" %>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <form action="pdf.do" method="POST" autocomplete="off">
-            
-            <button/>PDF</button>
-        <input type="hidden" id="status" name="status" value="guest">
-        </form>
->>>>>>> origin/main
     </body>
 </html>

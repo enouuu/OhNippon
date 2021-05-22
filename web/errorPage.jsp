@@ -13,7 +13,8 @@
         <link rel="icon" href="images\OhNipponLogo.png">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Oops!</title>
+        <link rel="icon" href="images\OhNipponLogo.png">
+        <title>Oops! Something went wrong.</title>
     </head>
     <body>
         <section class ="header">
@@ -23,12 +24,13 @@
                     <div class ="logoHeader"><img class="logo"  src="images\OhNipponLogo.png"><img class="logoText"  src="images\OhNipponText.png"></div>
                     <div class= "menuList">
                         <ul>
-                            <li><a href ="landing.jsp" class = "active">HOME</a></li>
+                            <li><a href ="landing.jsp">HOME</a></li>
                             <li><a href ="store.jsp">STORE</a></li>
                             <li><a href ="about.jsp">ABOUT</a></li>
                             <!-- add if else statement here to reveal profile/logout button
                             if the user is signed in. otherwise reveal the sign in button and hide the profile/logout button. -->
                             <li><a href ="signIn.jsp"><img  src="images\signin.png" class = "signInButton">&nbsp&nbspSIGN IN</a></li>
+                           <li><a href ="success.jsp">&nbsp&nbsp&nbspPROFILE</a></li>
                         </ul>
                     </div>
                 </div>

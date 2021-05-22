@@ -5,6 +5,8 @@
         <link rel="stylesheet" href="style.css" type="text/css"/>
          <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="images\OhNipponLogo.png">
+        <title>Shop Now</title>
 
     </head>
     <body>
@@ -21,6 +23,7 @@
                             <!-- add if else statement here to reveal profile/logout button
                             if the user is signed in. otherwise reveal the sign in button and hide the profile/logout button. -->
                             <li><a href ="signIn.jsp"><img  src="images\signin.png" class = "signInButton">&nbsp&nbspSIGN IN</a></li>
+                            <li><a href ="success.jsp">&nbsp&nbsp&nbspPROFILE</a></li>
                         </ul>
                     </div>
                 </div>
