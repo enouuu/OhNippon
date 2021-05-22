@@ -70,6 +70,8 @@ public class Controller_SignUp extends HttpServlet {
                 Captcha captcha = (Captcha) session.getAttribute(Captcha.NAME);
                 String answer = request.getParameter("inputCaptcha");
                 if (captcha.isCorrect(answer)) { //check captcha input to captcha answer
+                    String fn = request.getParameter("regFn").trim();
+                    String ln = request.getParameter("regLn").trim();
                     String email = request.getParameter("regEmail").trim();
                     String pass = request.getParameter("regPword").trim();
                     String conpass = request.getParameter("confirmPword").trim();
@@ -95,12 +97,14 @@ public class Controller_SignUp extends HttpServlet {
                     }
                     pStmt.close();
 
-                    PreparedStatement st = con.prepareStatement("INSERT INTO USER_INFO (EMAIL, PASSWORD, BIRTHDAY, ROLE, SUBSTATUS) VALUES (?, ?, ?, ?, ?)");
-                    st.setString(1, email);
-                    st.setString(2, encrypt(pass));
-                    st.setString(3, bday);
-                    st.setString(4, "Guest");
-                    st.setBoolean(5, false);
+                    PreparedStatement st = con.prepareStatement("INSERT INTO USER_INFO (FIRSTNAME, LASTNAME, EMAIL, PASSWORD, BIRTHDAY, ROLE, SUBSTATUS) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    st.setString(1, fn);
+                    st.setString(2, ln);
+                    st.setString(3, email);
+                    st.setString(4, encrypt(pass));
+                    st.setString(5, bday);
+                    st.setString(6, "Admin");
+                    st.setBoolean(7, false);
                     st.executeUpdate();
                     response.sendRedirect("landing.jsp");
                     st.close();

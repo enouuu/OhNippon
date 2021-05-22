@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.sql.ResultSet"%>
+<%@ page import="java.util.*" %>
+<%@ page import="Model.User" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,6 +16,7 @@
     </head>
     <body>
         <form action="pdf.do" method="POST" autocomplete="off">
+            
             <button/>PDF</button>
         <input type="hidden" id="status" name="status" value="guest">
         </form>
