@@ -38,29 +38,29 @@
             <div class ="signSide" data-aos="fade-left">
                 <div class="signUpBox">
                     <h2 class = "signInLabel">SIGN UP</h2>
-                    <form action="login.do" method="POST">
+                    <form action="signup.do" method="POST">
                         <!-- input field for username -->
                         <div class ="fName">
                             <label class = "unpwLabel">First Name</label><br>
-                            <input type="text" class="flName" name="inputEmail">
+                            <input type="text" class="flName" name="regFn">
                         </div>
                         <div class ="lName">
                             <label class = "unpwLabel">Last Name</label><br>
-                            <input type="text" class="flName" name="inputEmail">
+                            <input type="text" class="flName" name="regLn">
                         </div>
                         <br>
                         <label class = "unpwLabel">Date of Birth</label><br>
                         <input type="date" class="userpass" name="regBday">
                         <br><br>
                         <label class = "unpwLabel">Email Address</label><br>
-                        <input type="text" class="userpass" name="inputEmail" >
+                        <input type="text" class="userpass" name="regEmail" >
                         <br><br>
                         <!-- input field for password -->
                         <label class = "unpwLabel">Password</label><br>
-                        <input type="password" class="userpass" name="inputPword">
+                        <input type="password" class="userpass" name="regPword">
                         <br><br>
                         <label class = "unpwLabel">Confirm Password</label><br>
-                        <input type="password" class="userpass" name="inputPword">
+                        <input type="password" class="userpass" name="confirmPword">
                         <br><br>
                         <label class = "unpwLabel">Captcha</label><br>
                         <input type="text" class="userpass" name="inputCaptcha">
