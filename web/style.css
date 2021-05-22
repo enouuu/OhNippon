@@ -772,6 +772,68 @@ and open the template in the editor.
     background-color: #f55d61;
 }
 
+.successSec{
+    width: 100%;
+    height: 47vw;
+    background-color:  #3F4247;
+    background-image: linear-gradient(180deg, white 70%, #3F4247 30%);
+    overflow: hidden;
+}
+
+.rinaHelloSide{
+    float: right;
+    width: 30%;
+    padding-right: 25%;
+    padding-top: 5%;
+}
+
+.buttonContainer{
+    float: left;
+    width: 50%;
+    margin-left: 15%;
+    margin-right: -30%;
+}
+
+.downloadBox{
+    margin-top: 20%;
+    padding: 2.5vw;
+    width: 50%;
+    text-align: center;
+}
+
+.downloadBox h1 {
+    color: #FF3801;
+    font-family: Montserrat;
+    font-weight: 800;
+    font-size: 3vw;
+    margin-bottom: 1vw;
+}
+
+.downloadBox p {
+    color: black;
+    font-family: Montserrat;
+    font-weight: 200;
+    font-size: 1vw;
+    margin-bottom: 1.5vw;
+}
+
+.dlSubAdminBT{
+    background-color: white;
+    border-radius: 10px;
+    width: 70%;
+    box-shadow: 0 2px 3px rgba(1,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    text-align: center;
+    font-size:  1vw;
+    font-family: Montserrat;
+    border-style: none;
+    padding: 1vw;
+}
+
+.rinaWaveBImg{
+    width: 145%;
+    margin-top: -4vw;
+}
+
 /*responsive*/
 @media(max-width: 767px){
     .controls{
