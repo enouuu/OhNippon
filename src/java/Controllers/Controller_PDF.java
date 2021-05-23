@@ -72,7 +72,7 @@ public class Controller_PDF extends HttpServlet {
 
         try {
             double maxPage;
-            if (role.equals("Guest")) {
+            if (request.getParameter("status").equals("subscriber")) {
                 maxPage = 1;
             } else {
                 Statement stmt2 = conn.createStatement();
@@ -106,7 +106,7 @@ public class Controller_PDF extends HttpServlet {
             table.addCell("SUB END");
             
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT EMAIL,ROLE,SUBSTART,SUBEND FROM USER_INFO ORDER BY EMAIL");
+            ResultSet rs = stmt.executeQuery("SELECT EMAIL,ROLE,SUBSTART,SUBEND FROM USER_INFO WHERE SUBSTATUS = true ORDER BY EMAIL");
 
             int num = 1;
             while (rs.next()) {
@@ -120,7 +120,7 @@ public class Controller_PDF extends HttpServlet {
                     table.addCell(rs.getString("ROLE"));
                     table.addCell(rs.getString("SUBSTART"));
                     table.addCell(rs.getString("SUBEND"));
-                } else if (role.equals("Admin")){
+                } else if (request.getParameter("status").equals("admin")){
                     if (num % 26 == 0) {
                         docs.add(table);
                         docs.newPage();
