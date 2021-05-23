@@ -108,7 +108,7 @@ public class Controller_SignUp extends HttpServlet {
                     ResultSet rs = pStmt.executeQuery();
                     while (rs.next()) {
                         if (email.equals(rs.getString("EMAIL"))) { //check if email exists
-                            sc.setAttribute("errorMessage", "That email is already taken!");
+                            sc.setAttribute("errorMessage", "Gomen, that email is already taken!");
                             throw new AuthenticationException();
                         }
                     }

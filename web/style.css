@@ -520,7 +520,7 @@ and open the template in the editor.
 
 .signUpBox{
     margin-left: 1vw;
-    margin-top: 1.5vw;
+    margin-top: 0.2vw;
     padding: 2.5vw;
     background-color: white;
     border-radius: 50px;
@@ -890,14 +890,14 @@ and open the template in the editor.
     float: left;
 }
 
-.aboutCont .contactUs p{
+.aboutCont .contactUsb p{
     color: black;
     font-family: Montserrat;
     font-size: 0.9vw;
     margin-bottom: 1.2vw;
 }
 
-.contactUs{
+.contactUsb{
     float: left;
     width: 45%;
     text-align: center;

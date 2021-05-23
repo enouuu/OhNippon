@@ -70,10 +70,10 @@ public class Controller_Login extends HttpServlet {
                         throw new NullValueException();
                     }
                     else if (email.isEmpty()) {
-                        sc.setAttribute("errorMessage", "Gomen, Entered email is empty!");
+                        sc.setAttribute("errorMessage", "Gomen, entered email is empty!");
                         throw new NullValueException();
                     } else if(pass.isEmpty()){
-                        sc.setAttribute("errorMessage", "Gomen, Entered password is empty!");
+                        sc.setAttribute("errorMessage", "Gomen, entered password is empty!");
                         throw new NullValueException();
                     }
                     String query = "SELECT * FROM USER_INFO ORDER BY EMAIL";
@@ -92,7 +92,7 @@ public class Controller_Login extends HttpServlet {
                             return;
                         }else if (email.equals(rs.getString("EMAIL")) && !pass.equals(decrypt(rs.getString("PASSWORD")))) {
                             //error 2 - correct email, wrong pass
-                            sc.setAttribute("errorMessage", "You entered the wrong password!");
+                            sc.setAttribute("errorMessage", "Gomen, you entered the wrong password!");
                             throw new AuthenticationException();
                         } else if(rs.next() == false){
                            sc.setAttribute("errorMessage", "Gomen, the email does not exist in our database!");
@@ -102,7 +102,7 @@ public class Controller_Login extends HttpServlet {
                     pStmt.close();
                     rs.close();
                 } else {
-                    sc.setAttribute("errorMessage", "Incorrect Captcha entered!");
+                    sc.setAttribute("errorMessage", "Incorrect captcha entered!");
                     throw new AuthenticationException();
                 }
             } else {

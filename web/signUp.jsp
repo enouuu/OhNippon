@@ -18,7 +18,7 @@
                     <div class ="logoHeader"><img class="logo"  src="images\OhNipponLogo.png"><img class="logoText"  src="images\OhNipponText.png"></div>
                     <div class= "menuList">
                         <ul>
-                            <li><a href ="landing.jsp" class = "active">HOME</a></li>
+                            <li><a href ="landing.jsp">HOME</a></li>
                             <li><a href ="store.jsp">STORE</a></li>
                             <li><a href ="about.jsp">ABOUT</a></li>
                                 <%
@@ -26,10 +26,11 @@
                                     if (!test) {
                                 %>
                             <li><a href ="signIn.jsp"><img  src="images\signin.png" class = "signInButton">&nbsp&nbspSIGN IN</a></li>
+                             <li>&nbsp&nbsp&nbspGUEST</li>
                                     <%
                                     } else {
                                     %>
-                            <li><a href ="success.jsp">&nbsp&nbsp&nbspPROFILE</a></li>
+                            <li><a href ="success.jsp">PROFILE</a></li>
                             <li><a href ="logout.do">&nbsp&nbsp&nbspLOGOUT</a></li>
                                 <%
                                     }
@@ -74,8 +75,8 @@
                         <input type="password" class="userpass" name="confirmPword">
                         <br><br>
                         <!-- checkbox for subscriber -->
-                        <label class = "unpwLabel">Want to be a subscriber?</label><br>
-                        <input type="checkbox" class="userpass" name="regSub">
+                        <center><label class = "unpwLabel">Want to be a subscriber?</label>
+                            <input type="checkbox"  name="regSub"><br><br></center>
                         <!-- captcha -->
                         <label class = "unpwLabel">Captcha</label><br>
                         <input type="text" class="userpass" name="inputCaptcha">

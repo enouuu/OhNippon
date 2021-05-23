@@ -29,11 +29,12 @@
                                     if (!test) {
                                 %>
                             <li><a href ="signIn.jsp"><img  src="images\signin.png" class = "signInButton">&nbsp&nbspSIGN IN</a></li>
+                             <li>&nbsp&nbsp&nbspGUEST</li>
                                     <%
                                     } else {
                                     %>
-                            <li><a href ="success.jsp">&nbsp&nbsp&nbspPROFILE</a></li>
-                            <li><a href ="logout.do">&nbsp&nbsp&nbspLOGOUT</a></li>
+                            <li><a href ="success.jsp">PROFILE</a></li>
+                            <li><a href ="logout.do">LOGOUT</a></li>
                                 <%
                                     }
                                 %>

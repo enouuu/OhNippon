@@ -20,18 +20,19 @@
                     <div class ="logoHeader"><img class="logo"  src="images\OhNipponLogo.png"><img class="logoText"  src="images\OhNipponText.png"></div>
                     <div class= "menuList">
                         <ul>
-                            <li><a href ="landing.jsp" class = "active">HOME</a></li>
+                            <li><a href ="landing.jsp" >HOME</a></li>
                             <li><a href ="store.jsp">STORE</a></li>
-                            <li><a href ="about.jsp">ABOUT</a></li>
+                            <li><a href ="about.jsp"class = "active">ABOUT</a></li>
                                 <%
                                     boolean test = (session.getAttribute("sessionTest") != null);
                                     if (!test) {
                                 %>
                             <li><a href ="signIn.jsp"><img  src="images\signin.png" class = "signInButton">&nbsp&nbspSIGN IN</a></li>
+                            <li>&nbsp&nbsp&nbspGUEST</li>
                                     <%
                                     } else {
                                     %>
-                            <li><a href ="success.jsp">&nbsp&nbsp&nbspPROFILE</a></li>
+                            <li><a href ="success.jsp">PROFILE</a></li>
                             <li><a href ="logout.do">&nbsp&nbsp&nbspLOGOUT</a></li>
                                 <%
                                     }
@@ -54,7 +55,7 @@
 
                 <div class="boxSep">&nbsp</div>
 
-                <div class="contactUs">
+                <div class="contactUsb">
                     <h1><font color="black">Contact</font> Us</h1><br>
                     <p>http://ohnippon.com/<br>
                         Facebook: https://www.facebook.com/<br><br>
