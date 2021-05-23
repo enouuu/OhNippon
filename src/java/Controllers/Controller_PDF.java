@@ -72,7 +72,7 @@ public class Controller_PDF extends HttpServlet {
 
         try {
             double maxPage;
-            if (role.equals("Subscriber")) {
+            if (role.equals("Guest")) {
                 maxPage = 1;
             } else {
                 Statement stmt2 = conn.createStatement();
@@ -111,7 +111,7 @@ public class Controller_PDF extends HttpServlet {
             int num = 1;
             while (rs.next()) {
                 if (user.equals(rs.getString("EMAIL"))) {
-                    if (request.getParameter("status").equals("guest")) {
+                    if (request.getParameter("status").equals("subscriber")) {
                         table.addCell("1");
                     } else {
                         table.addCell(String.valueOf(num));
