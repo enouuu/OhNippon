@@ -94,13 +94,15 @@ public class Controller_Login extends HttpServlet {
                             //error 2 - correct email, wrong pass
                             sc.setAttribute("errorMessage", "Gomen, you entered the wrong password!");
                             throw new AuthenticationException();
-                        } else if(rs.next() == false){
-                           sc.setAttribute("errorMessage", "Gomen, the email does not exist in our database!");
-                           throw new AuthenticationException();
-                        }
+                        } 
                     }
+                    
                     pStmt.close();
                     rs.close();
+                   // if(!rs.next()){
+                           sc.setAttribute("errorMessage", "Gomen, the email does not exist in our database!");
+                           throw new AuthenticationException();
+                    //}
                 } else {
                     sc.setAttribute("errorMessage", "Incorrect captcha entered!");
                     throw new AuthenticationException();
