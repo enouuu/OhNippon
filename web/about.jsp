@@ -1,36 +1,92 @@
-<%@page import="Exceptions.NullValueException"%>
-<%@page import="Model.User"%>
-<%@page import="nl.captcha.Captcha"%>
-<%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>About OhNippon!</title>
+        <link rel="stylesheet" href="style.css" type="text/css"/>
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="images\OhNipponLogo.png">
+        <title>About</title>
     </head>
     <body>
-        <h1>Welcome to the About page of OhNippon! also for testing if contextlistener works hehe</h1>
-        <%
-            request.setCharacterEncoding("UTF-8");
-            ServletContext sc = getServletContext();
-            User scMsg = (User) getServletContext().getAttribute("loginDetails");
-            String myRole = scMsg.getRole();
-            if (session.getAttribute("sessionTest") == null) {
-                System.out.println(session.getAttribute("sessionTest"));
-                sc.setAttribute("errorMessage", "Your session is expired!");
-                throw new NullValueException();
-            }
-            session.invalidate();
-            response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
-            String header = getServletContext().getInitParameter("header");
-            String footer = getServletContext().getInitParameter("footer");
-        %>
-        <div class ="successCont ">
-            <h1 class = "succesMsg">WELCOME <% out.print(scMsg.getEmail() + "!\nRole: " + myRole + "\nIs subscribed? " + scMsg.getSubscription()); %>!</h1>
-            <h2><font color = "white" size = "3.3vw">
-                <%out.print(scMsg);%>
-                </font></h2>
-        </div>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0" nonce="oI7pGRSV"></script>
+
+        <section class ="header">
+            <div class ="wrapper">
+                <div class ="mainHeader">
+                    <div class="hamburger"></div>
+                    <div class ="logoHeader"><img class="logo"  src="images\OhNipponLogo.png"><img class="logoText"  src="images\OhNipponText.png"></div>
+                    <div class= "menuList">
+                        <ul>
+                            <li><a href ="landing.jsp">HOME</a></li>
+                            <li><a href ="store.jsp">STORE</a></li>
+                            <li><a href ="about.jsp"  class = "active">ABOUT</a></li>
+                            <!-- add if else statement here to reveal profile/logout button
+                            if the user is signed in. otherwise reveal the sign in button and hide the profile/logout button. -->
+                            <li><a href ="signIn.jsp"><img  src="images\signin.png" class = "signInButton">&nbsp&nbspSIGN IN</a></li>
+                            <li><a href ="success.jsp">&nbsp&nbsp&nbspPROFILE</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="aboutSec">
+            <div class ="aboutImg" data-aos ="fade-down"><img class="ohNipponbg" src = "images\ohNipponbg.png"></div>
+            <div class ="aboutCont"  data-aos ="zoom-in-up">
+                <div class="aboutUs">
+                    <h1><font color="black">About</font> Us</h1><br>
+                    <p>Oh Nippon! is the first foreign startup business approved by the government of Hokkaido in November 2020. 
+                        Oh Nippon! aims to create content related to Japan and publish it through different social media platforms to reach out to an international audience.
+                    </p>
+                </div>
+
+                <div class="boxSep">&nbsp</div>
+
+                <div class="contactUs">
+                    <h1><font color="black">Contact</font> Us</h1><br>
+                    <p>http://ohnippon.com/<br>
+                        Facebook: https://www.facebook.com/<br><br>
+                        <strong>Got a business opportunity, feedback or inquiry? Send us an email at:</strong><br>
+                        <font color="#ED3300">contact_us@ohnippon.com</font>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="subscribe">
+            <div class="emailInput" data-aos="fade-up"><label>Newsletter Sign Up</label>
+                <form action=""><input class="emailText" type="text" placeholder ="Enter your email here..."><button class ="emailBT">Submit</button></form>
+            </div>
+            <div class="contactUs" data-aos="fade-up">
+                <h2>Contact Us</h2><br><p>Have any questions or suggestions for Oh Nippon?</p>
+                <form action=""><button class ="getInvolved">Get Involved</button>
+                    <button class ="sendUs">Send us a message</button></form>
+            </div>
+            <div class="supportOn" data-aos="fade-up">
+                <h2>Support Oh Nippon!</h2><br><p>Follow Oh Nippon! Find us on social media.</p>
+                <a href = "https://www.facebook.com/ohnippon"><img class ="socMed" src="images\fb.png"></a>
+                <a href = "https://www.instagram.com/oh_nippon"><img class ="socMed" src="images\ig.png"></a>
+                <a href = "https://www.youtube.com/channel/UC2W5RmbEJ0ZVVzSAw5UNWAQ"><img class ="socMed" src="images\yt.png"></a>
+            </div>
+        </section>
+
+        <section class ="footer">
+            <img class="logoTextB"  src="images\OhNipponTextB.png"><img class="copyright"  src="images\copyright.png">
+            <div class="langOptions">
+                <img class = "langIcon" src ="images\language.png" >
+                <select class = "langChoice" d="sel_id" name="sel_name"  onchange="this.form.submit();">
+                    <option value="1">English</option>
+                    <option value="2">Japanese</option>                
+                </select>
+            </div>
+        </section>
+        <script src="script.js"></script>
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script>
+                    AOS.init();
+        </script>
     </body>
 </html>

@@ -834,6 +834,76 @@ and open the template in the editor.
     margin-top: -4vw;
 }
 
+.aboutSec{
+    width: 100%;
+    height: 62vw;
+}
+
+.aboutImg{
+    width: 100%;
+    height: 32.5vw;
+    overflow: hidden;
+}
+
+.ohNipponbg{
+    width: 100%;
+}
+
+.aboutCont{
+    margin: auto;
+    margin-top: 4vw;
+    padding: 2.5vw;
+    background-color: white;
+    border-radius: 50px;
+    width: 80%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.aboutUs{
+    float: left;
+    text-align: center;
+    width: 45%;
+}
+
+.aboutCont h1{
+    color: #FF3801;
+    font-family: Montserrat;
+    font-weight: 800;
+    font-size: 2.5vw;
+    margin-bottom: 1vw;
+}
+
+.aboutCont .aboutUs p{
+    font-family: Montserrat;
+    font-size: 0.9vw;
+    margin-bottom: 1.2vw;
+    text-align: left;
+}
+
+.boxSep{
+    background-color: #C4C4C4;
+    width: 0.3%;
+    height: 15vw;
+    margin: 0 5vw 0 5vw;
+    display: inline-block;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    float: left;
+}
+
+.aboutCont .contactUs p{
+    color: black;
+    font-family: Montserrat;
+    font-size: 0.9vw;
+    margin-bottom: 1.2vw;
+}
+
+.contactUs{
+    float: left;
+    width: 45%;
+    text-align: center;
+    margin-left: -3%;
+}
+
 /*responsive*/
 @media(max-width: 767px){
     .controls{
