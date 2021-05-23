@@ -20,8 +20,13 @@
     </head>
     <body>
         <%
+            if(session.getAttribute("sessionTest") == null){
+                response.sendRedirect("landing.jsp");
+                return;
+            }
             String header = getServletContext().getInitParameter("header");
             String footer = getServletContext().getInitParameter("footer");
+            response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
             User scMsg = (User) getServletContext().getAttribute("loginDetails");
             String firstName = scMsg.getFirstName();
             String role = scMsg.getRole();
@@ -43,10 +48,10 @@
                                     if (!test) {
                                 %>
                             <li><a href ="signIn.jsp"><img  src="images\signin.png" class = "signInButton">&nbsp&nbspSIGN IN</a></li>
-                             <li>&nbsp&nbsp&nbspGUEST</li>
-                                    <%
-                                    } else {
-                                    %>
+                            <li>&nbsp&nbsp&nbspGUEST</li>
+                                <%
+                                } else {
+                                %>
                             <li><a href ="success.jsp" class = "active">PROFILE</a></li>
                             <li><a href ="logout.do">&nbsp&nbsp&nbspLOGOUT</a></li>
                                 <%
@@ -63,7 +68,7 @@
                 <div class="downloadBox">
                     <h1>Welcome, <%out.print(firstName);%>!</h1>
                     <p>
-                        You are <% if (role.equals("Guest")) { %>
+                        You are <% if (role.equals("Guest")) {%>
                         a
                         <%} else { %>
                         an

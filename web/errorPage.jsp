@@ -17,6 +17,9 @@
         <title>Oops! Something went wrong.</title>
     </head>
     <body>
+        <%
+            response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+        %>
         <section class ="header">
             <div class ="wrapper">
                 <div class ="mainHeader">
@@ -32,10 +35,10 @@
                                     if (!test) {
                                 %>
                             <li><a href ="signIn.jsp"><img  src="images\signin.png" class = "signInButton">&nbsp&nbspSIGN IN</a></li>
-                             <li>&nbsp&nbsp&nbspGUEST</li>
-                                    <%
-                                    } else {
-                                    %>
+                            <li>&nbsp&nbsp&nbspGUEST</li>
+                                <%
+                                } else {
+                                %>
                             <li><a href ="success.jsp">PROFILE</a></li>
                             <li><a href ="logout.do">&nbsp&nbsp&nbspLOGOUT</a></li>
                                 <%
@@ -58,7 +61,6 @@
                         <p>
                             <%
                                 ServletContext sc = getServletContext();
-                                response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
                                 String header = getServletContext().getInitParameter("header");
                                 String footer = getServletContext().getInitParameter("footer");
                                 String errMsg = (String) getServletContext().getAttribute("errorMessage");

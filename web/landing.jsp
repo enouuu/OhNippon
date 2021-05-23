@@ -11,6 +11,9 @@
         <title>Oh! Nippon</title>
     </head>
     <body>
+        <%
+            response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+        %>
         <div id="fb-root"></div>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0" nonce="oI7pGRSV"></script>
 

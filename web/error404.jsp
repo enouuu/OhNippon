@@ -17,6 +17,9 @@
         <title>This page does not exist!</title>
     </head>
     <body>
+        <%
+            response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+        %>
         <section class ="header">
             <div class ="wrapper">
                 <div class ="mainHeader">
