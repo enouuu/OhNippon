@@ -2,11 +2,11 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <context-param>
         <param-name>header</param-name>
-        <param-value>Final Academic Project</param-value>
+        <param-value>OhNippon</param-value>
     </context-param>
     <context-param>
         <param-name>footer</param-name>
-        <param-value>Copyright 2021. Coded by Matthew Ang, Hannah Carpio, Paul Feliciano, Nhel Gonzales, and Julian Mendoza.</param-value>
+        <param-value>Coded by Ang, Carpio, Feliciano, Gonzales, and Mendoza.</param-value>
     </context-param>
     <listener>
         <description>ServletContextListener</description>

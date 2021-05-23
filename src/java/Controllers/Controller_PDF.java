@@ -52,7 +52,6 @@ public class Controller_PDF extends HttpServlet {
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, DocumentException, DocumentException {
-        //HttpSession session = request.getSession();
         SimpleDateFormat formatTemplate = new SimpleDateFormat("yyyyMMddHHmmss");
         Date date = new Date();
         String name = formatTemplate.format(date);
@@ -62,27 +61,18 @@ public class Controller_PDF extends HttpServlet {
         response.setContentType("application/pdf");
         response.setHeader("Content-Disposition", "attachment; filename=" + name + ".pdf");
         
-        //System.out.println("here");
-        
         User details = (User) getServletContext().getAttribute("loginDetails");
         String user = details.getEmail();
         String role = details.getRole();
-        
-        //System.out.println("here");
 
         Document docs = new Document();
-        System.out.println("1");
         PdfWriter writer = PdfWriter.getInstance(docs, response.getOutputStream());
-        System.out.println("2");
         Rectangle rect = new Rectangle(PageSize.LETTER.rotate());
-        System.out.println("3");
         writer.setBoxSize("art", rect);
-        System.out.println("4");
 
-        //System.out.println(request.getParameter("header") + " " + request.getParameter("footer"));
         try {
             double maxPage;
-            if (role.equals("Guest")) {
+            if (role.equals("Subscriber")) {
                 maxPage = 1;
             } else {
                 Statement stmt2 = conn.createStatement();
@@ -99,9 +89,7 @@ public class Controller_PDF extends HttpServlet {
                 stmt2.close();
             }
             
-            System.out.println("5");
-            
-            HeaderFooterPageEvent event = new HeaderFooterPageEvent(user, role, dtf.format(now), maxPage);
+            HeaderFooterPageEvent event = new HeaderFooterPageEvent(request.getParameter("header"), request.getParameter("footer"), user, role, dtf.format(now), maxPage);
             writer.setPageEvent(event);
             
             docs.setPageSize(rect);

@@ -5,6 +5,7 @@
     Author     : Matt
 --%>
 
+<%@page import="Model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,6 +19,13 @@
         <title>Oh! Nippon</title>
     </head>
     <body>
+        <%
+            String header = getServletContext().getInitParameter("header");
+            String footer = getServletContext().getInitParameter("footer");
+            User scMsg = (User) getServletContext().getAttribute("loginDetails");
+            //String user = scMsg.getEmail();
+            String role = scMsg.getRole();
+        %>
         <section class ="header">
             <div class ="wrapper">
                 <div class ="mainHeader">
@@ -41,12 +49,42 @@
         <section class ="successSec">
                 <div class="buttonContainer">
                     <div class="downloadBox">
-                        <h1>Welcome, (user)!</h1>
+                        <h1>Welcome, <% %>!</h1>
                         <p>
-                            You are a (role)<br>
+                            You are a <% %><br>
                         </p>
-                        <button class ="dlSubAdminBT" onclick="goBack()">Click here to download your subscription information.</button><br><br>
-                        <button class ="dlSubAdminBT" onclick="goBack()">Click here to download the list of subscribers.</button>
+                        <form id="toggle1" method="POST" action="pdf.do">
+                            <button class ="dlSubAdminBT">Click here to download your subscription information.</button><br><br>
+                            <input type="hidden" id="status" name="status" value="subscriber">
+                            <input type="hidden" id="header" name="header" value="<%= header%>">
+                            <input type="hidden" id="footer" name="footer" value="<%= footer%>">
+                        </form>
+                        <<form id="toggle2" method="POST" action="pdf.do">
+                            <button class ="dlSubAdminBT">Click here to download the list of subscribers.</button>
+                            <input type="hidden" id="status" name="status" value="admin">
+                            <input type="hidden" id="header" name="header" value="<%= header%>">
+                            <input type="hidden" id="footer" name="footer" value="<%= footer%>">
+                        </form>
+                            <%
+                            if (role.equals("Guest")) {%>
+                            <script>
+                                document.getElementById('toggle1').style.visibility = 'hidden';
+                                document.getElementById('toggle2').style.visibility = 'hidden';
+                            </script>
+                            <%} 
+                            if (role.equals("Subscriber")){%>
+                            <script>
+                                document.getElementById('toggle').style.visibility = 'visible';
+                                document.getElementById('toggle2').style.visibility = 'hidden';
+                            </script>
+                            <%}
+                            if (role.equals("Subscriber")){%>
+                            <script>
+                                document.getElementById('toggle').style.visibility = 'visible';
+                                document.getElementById('toggle2').style.visibility = 'visible';
+                            </script>
+                            <%}
+                            %>
                     </div>
                 </div>
              <div class="rinaHelloSide">
