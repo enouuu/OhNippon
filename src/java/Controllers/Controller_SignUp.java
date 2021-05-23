@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import nl.captcha.Captcha;
-import static security.CipherMain.encrypt;
+import static Security.CipherMain.encrypt;
 
 public class Controller_SignUp extends HttpServlet {
 
@@ -28,6 +28,7 @@ public class Controller_SignUp extends HttpServlet {
     DateFormat formatYear = new SimpleDateFormat("yyyy");
     DateFormat formatMonth = new SimpleDateFormat("MM");
     DateFormat formatDay = new SimpleDateFormat("dd");
+    DateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
     Calendar cal = Calendar.getInstance();
     int year = Integer.parseInt(formatYear.format(cal.getTime()));
     int month = Integer.parseInt(formatMonth.format(cal.getTime()));
@@ -78,53 +79,63 @@ public class Controller_SignUp extends HttpServlet {
                     String pass = request.getParameter("regPword").trim();
                     String conpass = request.getParameter("confirmPword").trim();
                     String bday = request.getParameter("regBday").trim();
+                    String subCheck = request.getParameter("regSub");
                     if (!pass.equals(conpass)) { //password checker
                         sc.setAttribute("errorMessage", "Gomen, your password does not match with your confirm password!");
                         throw new AuthenticationException();
                     }
-                    if(!checkAge(Integer.parseInt(bday.substring(0, 4)), Integer.parseInt(bday.substring(5, 7))
-                            , Integer.parseInt(bday.substring(8)))){
+                    if (!checkAge(Integer.parseInt(bday.substring(0, 4)), Integer.parseInt(bday.substring(5, 7)),
+                            Integer.parseInt(bday.substring(8)))) {
                         sc.setAttribute("errorMessage", "You are under 18 years old!");
                         throw new AuthenticationException();
-                    }  
-                    if (fn.isEmpty()){
+                    }
+                    if (fn.isEmpty()) {
                         sc.setAttribute("errorMessage", "Gomen, first name is empty!");
                         throw new NullValueException();
-                    } else if (fn.isEmpty()){
-                        sc.setAttribute("errorMessage", "Gomen, first name is empty!");
-                        throw new NullValueException();
-                    } else if (ln.isEmpty()){
+                    } else if (ln.isEmpty()) {
                         sc.setAttribute("errorMessage", "Gomen, last name is empty!");
                         throw new NullValueException();
-                    } else if (email.isEmpty()){
+                    } else if (email.isEmpty()) {
                         sc.setAttribute("errorMessage", "Gomen, email is empty!");
                         throw new NullValueException();
-                    } else if (pass.isEmpty()){
+                    } else if (pass.isEmpty()) {
                         sc.setAttribute("errorMessage", "Gomen, password is empty!");
                         throw new NullValueException();
-                    } 
+                    }
                     System.out.println(testAge);
                     String query = "SELECT EMAIL FROM USER_INFO";
                     PreparedStatement pStmt = con.prepareStatement(query);
                     ResultSet rs = pStmt.executeQuery();
                     while (rs.next()) {
-                        if (email.equals(rs.getString("EMAIL"))) { //check if username exists
+                        if (email.equals(rs.getString("EMAIL"))) { //check if email exists
                             sc.setAttribute("errorMessage", "That email is already taken!");
                             throw new AuthenticationException();
                         }
                     }
                     pStmt.close();
-                   
-                    PreparedStatement st = con.prepareStatement("INSERT INTO USER_INFO (FIRSTNAME, LASTNAME, EMAIL, PASSWORD, BIRTHDAY, ROLE, SUBSTATUS) VALUES (?, ?, ?, ?, ?, ?, ?)");
+
+                    PreparedStatement st = con.prepareStatement("INSERT INTO USER_INFO (FIRSTNAME, LASTNAME, EMAIL, PASSWORD, BIRTHDAY, ROLE, SUBSTATUS"
+                            + ", SUBSTART, SUBEND) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
                     st.setString(1, fn);
                     st.setString(2, ln);
                     st.setString(3, email);
                     st.setString(4, encrypt(pass));
                     st.setString(5, bday);
                     st.setString(6, "Guest");
-                    st.setBoolean(7, false);
+                    if (subCheck != null) {
+                        st.setBoolean(7, true);
+                        String subToday = formatDate.format(cal.getTime()).toString();
+                        st.setString(8, subToday);
+                        cal.add(Calendar.DAY_OF_MONTH, 30);
+                        String subEnd = formatDate.format(cal.getTime()).toString();
+                        st.setString(9, subEnd);
+                    } else {
+                        st.setBoolean(7, false);
+                        st.setString(8, null);
+                        st.setString(9, null);
+                    }
                     st.executeUpdate();
-                    response.sendRedirect("landing.jsp");
+                    response.sendRedirect("signIn.jsp");
                     st.close();
                     rs.close();
                     return;
@@ -143,20 +154,20 @@ public class Controller_SignUp extends HttpServlet {
             response.sendRedirect("errorPage.jsp");
         } catch (AuthenticationException aue) {
             response.sendRedirect("errorPage.jsp");
-        } catch (NullValueException nve){
+        } catch (NullValueException nve) {
             response.sendRedirect("errorPage.jsp");
         }
     }
 
     public boolean checkAge(int numYear, int numMonth, int numDay) {
-        int age = (int)year - numYear;
+        int age = (int) year - numYear;
         if (month < numMonth) {
             age--;
         } else if (numMonth == month && numDay < day) {
             age--;
         }
         testAge = age;
-        if(age >= 18){
+        if (age >= 18) {
             return true;
         }
         return false;

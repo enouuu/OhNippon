@@ -23,8 +23,10 @@
             String header = getServletContext().getInitParameter("header");
             String footer = getServletContext().getInitParameter("footer");
             User scMsg = (User) getServletContext().getAttribute("loginDetails");
-            //String user = scMsg.getEmail();
+            String firstName = scMsg.getFirstName();
             String role = scMsg.getRole();
+            boolean status = scMsg.getSubscription();
+            String subEnd = scMsg.getSubEnd();
         %>
         <section class ="header">
             <div class ="wrapper">
@@ -33,13 +35,22 @@
                     <div class ="logoHeader"><img class="logo"  src="images\OhNipponLogo.png"><img class="logoText"  src="images\OhNipponText.png"></div>
                     <div class= "menuList">
                         <ul>
-                            <li><a href ="landing.jsp" >HOME</a></li>
+                            <li><a href ="landing.jsp" class = "active">HOME</a></li>
                             <li><a href ="store.jsp">STORE</a></li>
                             <li><a href ="about.jsp">ABOUT</a></li>
-                            <!-- add if else statement here to reveal profile/logout button
-                            if the user is signed in. otherwise reveal the sign in button and hide the profile/logout button. -->
+                                <%
+                                    boolean test = (session.getAttribute("sessionTest") != null);
+                                    if (!test) {
+                                %>
                             <li><a href ="signIn.jsp"><img  src="images\signin.png" class = "signInButton">&nbsp&nbspSIGN IN</a></li>
-                           <li><a href ="success.jsp" class = "active">&nbsp&nbsp&nbspPROFILE</a></li>
+                                    <%
+                                    } else {
+                                    %>
+                            <li><a href ="success.jsp">&nbsp&nbsp&nbspPROFILE</a></li>
+                            <li><a href ="logout.do">&nbsp&nbsp&nbspLOGOUT</a></li>
+                                <%
+                                    }
+                                %>
                         </ul>
                     </div>
                 </div>
@@ -47,49 +58,65 @@
         </section>
 
         <section class ="successSec">
-                <div class="buttonContainer">
-                    <div class="downloadBox">
-                        <h1>Welcome, <% %>!</h1>
-                        <p>
-                            You are a <% %><br>
-                        </p>
-                        <form id="toggle1" method="POST" action="pdf.do">
-                            <button class ="dlSubAdminBT">Click here to download your subscription information.</button><br><br>
-                            <input type="hidden" id="status" name="status" value="subscriber">
-                            <input type="hidden" id="header" name="header" value="<%= header%>">
-                            <input type="hidden" id="footer" name="footer" value="<%= footer%>">
-                        </form>
-                        <<form id="toggle2" method="POST" action="pdf.do">
-                            <button class ="dlSubAdminBT">Click here to download the list of subscribers.</button>
-                            <input type="hidden" id="status" name="status" value="admin">
-                            <input type="hidden" id="header" name="header" value="<%= header%>">
-                            <input type="hidden" id="footer" name="footer" value="<%= footer%>">
-                        </form>
-                            <%
-                            if (role.equals("Guest")) {%>
-                            <script>
-                                document.getElementById('toggle1').style.visibility = 'hidden';
-                                document.getElementById('toggle2').style.visibility = 'hidden';
-                            </script>
-                            <%} 
-                            if (role.equals("Subscriber")){%>
-                            <script>
-                                document.getElementById('toggle').style.visibility = 'visible';
-                                document.getElementById('toggle2').style.visibility = 'hidden';
-                            </script>
-                            <%}
-                            if (role.equals("Subscriber")){%>
-                            <script>
-                                document.getElementById('toggle').style.visibility = 'visible';
-                                document.getElementById('toggle2').style.visibility = 'visible';
-                            </script>
-                            <%}
-                            %>
-                    </div>
+            <div class="buttonContainer">
+                <div class="downloadBox">
+                    <h1>Welcome, <%out.print(firstName);%>!</h1>
+                    <p>
+                        You are <% if (role.equals("Guest")) { %>
+                        a
+                        <%} else { %>
+                        an
+                        <%}
+                            out.print(role);%>!<br>
+                        <%if (status) { %>
+                    <p>&nbspYou are currently subscribed! Your subscription will end on: <% out.print(subEnd); %></p>
+                    <%} else {%>
+                    <p>&nbspYou are currently not a subscriber!</p>
+                    <%}%>
+                    </p>
+                    <form id="toggle1" method="POST" action="pdf.do">
+                        <button class ="dlSubAdminBT">Click here to download your subscription information.</button><br><br>
+                        <input type="hidden" id="status" name="status" value="subscriber">
+                        <input type="hidden" id="header" name="header" value="<%= header%>">
+                        <input type="hidden" id="footer" name="footer" value="<%= footer%>">
+                    </form>
+                    <form id="toggle2" method="POST" action="pdf.do">
+                        <button class ="dlSubAdminBT">Click here to download the list of subscribers.</button>
+                        <input type="hidden" id="status" name="status" value="admin">
+                        <input type="hidden" id="header" name="header" value="<%= header%>">
+                        <input type="hidden" id="footer" name="footer" value="<%= footer%>">
+                    </form>
+                    <%
+                        if (role.equals("Admin")) {
+                            if (status) { %>
+                    <script>
+                        document.getElementById('toggle1').style.visibility = 'visible';
+                        document.getElementById('toggle2').style.visibility = 'visible';
+                    </script>
+                    <%} else { %>
+                    <script>
+                        document.getElementById('toggle1').style.visibility = 'hidden';
+                        document.getElementById('toggle2').style.visibility = 'visible';
+                    </script>
+                    <%}
+                    } else if (role.equals("Guest")) {
+                        if (status) { %>
+                    <script>
+                        document.getElementById('toggle1').style.visibility = 'visible';
+                        document.getElementById('toggle2').style.visibility = 'hidden';
+                    </script>
+                    <%} else { %>
+                    <script>
+                        document.getElementById('toggle1').style.visibility = 'hidden';
+                        document.getElementById('toggle2').style.visibility = 'hidden';
+                    </script>
+                    <%}
+                        }%>
                 </div>
-             <div class="rinaHelloSide">
-                    <img class="rinaWaveBImg"data-aos="zoom-in-up" src="images\rinaWaveB.png">
-                </div>
+            </div>
+            <div class="rinaHelloSide">
+                <img class="rinaWaveBImg"data-aos="zoom-in-up" src="images\rinaWaveB.png">
+            </div>
         </section>
         <section class="subscribe">
             <div class="emailInput" data-aos="fade-up"><label>Newsletter Sign Up</label>

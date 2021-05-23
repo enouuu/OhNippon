@@ -1,7 +1,7 @@
 package Controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,16 +10,25 @@ import javax.servlet.http.HttpSession;
 
 public class Controller_LogOut extends HttpServlet {
 
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        ServletContext sc = getServletContext();
+        sc.removeAttribute("loginDetails");
+        session.removeAttribute("sessionTest");
+        session.invalidate();
+        response.sendRedirect("landing.jsp");
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.removeAttribute("userEmail");
-        session.removeAttribute("userRole");
-        session.removeAttribute("userSubStatus");
-        session.invalidate();
-        response.sendRedirect("landing.jsp");
+        processRequest(request, response);
+    }
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     @Override

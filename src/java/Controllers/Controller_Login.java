@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import nl.captcha.Captcha;
-import static security.CipherMain.decrypt;
+import static Security.CipherMain.decrypt;
 
 public class Controller_Login extends HttpServlet {
 
@@ -83,13 +83,13 @@ public class Controller_Login extends HttpServlet {
                         if (email.equals(rs.getString("EMAIL")) && pass.equals(decrypt(rs.getString("PASSWORD")))) {
                             //HttpSession session = request.getSession();
                             session.setAttribute("sessionTest", true);
-                            User human = new User(email, pass, rs.getString("ROLE"), rs.getBoolean("SUBSTATUS"));
+                            User human = new User(email, pass, rs.getString("ROLE"), rs.getBoolean("SUBSTATUS"), rs.getString("FIRSTNAME"),
+                                                    rs.getString("LASTNAME"), rs.getString("SUBSTART"), rs.getString("SUBEND"));
                             sc.setAttribute("loginDetails", human);
                             userContextListener ucl = new userContextListener();
                             ucl.contextInitialized(new ServletContextEvent(sc));
-                            response.sendRedirect("landing.jsp");
+                            response.sendRedirect("success.jsp");
                             return;
-
                         }else if (email.equals(rs.getString("EMAIL")) && !pass.equals(decrypt(rs.getString("PASSWORD")))) {
                             //error 2 - correct email, wrong pass
                             sc.setAttribute("errorMessage", "You entered the wrong password!");
