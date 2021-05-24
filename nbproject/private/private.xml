@@ -5,7 +5,15 @@
         <group>
             <file>file:/C:/Users/Paul%20Andre%20Feliciano/Documents/NetBeansProjects/OhNippon/web/landing.jsp</file>
             <file>file:/C:/Users/Paul%20Andre%20Feliciano/Documents/NetBeansProjects/OhNippon/web/about.jsp</file>
+            <file>file:/C:/Users/Paul%20Andre%20Feliciano/Documents/NetBeansProjects/OhNippon/src/java/Controllers/Controller_Login.java</file>
+            <file>file:/C:/Users/Paul%20Andre%20Feliciano/Documents/NetBeansProjects/OhNippon/web/errorPage.jsp</file>
+            <file>file:/C:/Users/Paul%20Andre%20Feliciano/Documents/NetBeansProjects/OhNippon/web/signUp.jsp</file>
+            <file>file:/C:/Users/Paul%20Andre%20Feliciano/Documents/NetBeansProjects/OhNippon/web/error404.jsp</file>
+            <file>file:/C:/Users/Paul%20Andre%20Feliciano/Documents/NetBeansProjects/OhNippon/web/store.jsp</file>
             <file>file:/C:/Users/Paul%20Andre%20Feliciano/Documents/NetBeansProjects/OhNippon/web/style.css</file>
+            <file>file:/C:/Users/Paul%20Andre%20Feliciano/Documents/NetBeansProjects/OhNippon/web/success.jsp</file>
+            <file>file:/C:/Users/Paul%20Andre%20Feliciano/Documents/NetBeansProjects/OhNippon/src/java/Controllers/Controller_SignUp.java</file>
+            <file>file:/C:/Users/Paul%20Andre%20Feliciano/Documents/NetBeansProjects/OhNippon/web/signIn.jsp</file>
         </group>
     </open-files>
 </project-private>

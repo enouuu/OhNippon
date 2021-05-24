@@ -27,20 +27,20 @@
                     <div class ="logoHeader"><img class="logo"  src="images\OhNipponLogo.png"><img class="logoText"  src="images\OhNipponText.png"></div>
                     <div class= "menuList">
                         <ul>
-                            <li><a href ="landing.jsp">HOME</a></li>
-                            <li><a href ="store.jsp">STORE</a></li>
-                            <li><a href ="about.jsp">ABOUT</a></li>
+                            <li><a href ="landing.jsp"><img  src="images\home.png" class = "signInButton">&nbsp&nbspHOME</a></li>
+                            <li><a href ="store.jsp"><img  src="images\store.png" class = "signInButton">&nbsp&nbspSTORE</a></li>
+                            <li><a href ="about.jsp"><img  src="images\abouta.png" class = "signInButton">&nbsp&nbspABOUT</a></li>
                                 <%
                                     boolean test = (session.getAttribute("sessionTest") != null);
                                     if (!test) {
                                 %>
                             <li><a href ="signIn.jsp"><img  src="images\signin.png" class = "signInButton">&nbsp&nbspSIGN IN</a></li>
-                             <li>&nbsp&nbsp&nbspGUEST</li>
+                             <li><img  src="images\guest.png" class = "signInButton">&nbsp&nbspGUEST</li>
                                     <%
                                     } else {
                                     %>
-                            <li><a href ="success.jsp">PROFILE</a></li>
-                            <li><a href ="logout.do">&nbsp&nbsp&nbspLOGOUT</a></li>
+                            <li><a href ="success.jsp"><img  src="images\guest.png" class = "signInButton">&nbsp&nbspPROFILE</a></li>
+                            <li><a href ="logout.do"><img  src="images\logout.png" class = "signInButton">&nbsp&nbspLOGOUT</a></li>
                                 <%
                                     }
                                 %>
